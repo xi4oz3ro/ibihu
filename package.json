@@ -1,0 +1,22 @@
+{
+  "name": "ibihu",
+  "version": "1.0.0",
+  "description": "express blog website",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xi4oz3ro/ibihu.git"
+  },
+  "author": "xi4oz3ro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xi4oz3ro/ibihu/issues"
+  },
+  "homepage": "https://github.com/xi4oz3ro/ibihu#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
