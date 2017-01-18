@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+  padding-top: 60px;
+}
+.nav-tabs{
+	width: 100%;
+	border-bottom: 1px solid #f0f2f7;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+	color: #ac3911;
+	font-weight: bold;
+}
