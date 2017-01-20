@@ -5,18 +5,21 @@
 	<div class="ProfileMain-header">
 		<ul role="tablist" class="Tabs ProfileMain-tabs">
 			<li role="tab" class="Tabs-item Tabs-item--noMeta" aria-controls="Profile-following">
-				<a class="Tabs-link is-active" href="/people/wangnuonuo/following">知乎用户榜</a>
+				<a class="Tabs-link is-active" href="#">知乎用户榜</a>
 			</li>
 			<li style="float: right; padding-top: 10px;">
 				<div class="btn-group">
                   <a href="#" class="btn btn-primary"><%= subtitle %></a>
                   <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                   <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="/zhihu/users/top_follower_count">Action</a></li>
+                    <li><a href="/zhihu/users/top_voteup_count">Action</a></li>
+                    <li><a href="/zhihu/users/top_thanked_count">Action</a></li>
+                    <li><a href="/zhihu/users/top_favorited_count">Action</a></li>
+                    <li><a href="/zhihu/users/top_articles_count">Action</a></li>
+                    <li><a href="/zhihu/users/top_question_count">Action</a></li>
+                    <li><a href="/zhihu/users/top_answer_count">Action</a></li>
+                    <li><a href="/zhihu/users/top_markedanswers_count">Action</a></li>
                   </ul>
                 </div>
 			</li>
@@ -24,104 +27,115 @@
 	</div>
 		<div class="List" id="main-context">
 			<div class="List-item" v-for="item in items">
-  			<div class="PortraitItem">
-  				<span class="UserLink PortraitItem-image UserItem-avatar">
-  					<div class="Popover">
-  						<div>
-  						<a class="UserLink-link" target="_blank" v-bind:href="'https://www.zhihu.com/people/' + item.urlToken">
-  							<img class="Avatar Avatar--large UserLink-avatar" v-bind:src="item.avatarUrl.replace('_is','_im')" v-bind:srcset="item.avatarUrl.replace('_is','_xl') + ' 2x'" v-bind:alt="item.name" style="width: 60px; height: 60px;">
-  						</a>
-  						</div>
-  					</div>
-  				</span>
-  				<div class="ContentItem PortraitItem-content">
-  					<h2 class="ContentItem-title">
-  						<div class="UserItem-title">
-  							<span class="UserLink UserItem-name">
-  								<div class="Popover">
-  									<div>
-  										<a class="UserLink-link" target="_blank" v-bind:href="'https://www.zhihu.com/people/' + item.urlToken">{{item.name}}</a>
-  										<div class="ProfileHeader-iconWrapper" v-if="item.gender==1"><svg width="14" height="16" viewBox="0 0 12 16" class="Icon Icon--female" aria-hidden="true" style="height: 16px; width: 14px;"><title></title><g><path d="M6 0C2.962 0 .5 2.462.5 5.5c0 2.69 1.932 4.93 4.485 5.407-.003.702.01 1.087.01 1.087H3C1.667 12 1.667 14 3 14s1.996-.006 1.996-.006v1c0 1.346 2.004 1.346 1.998 0-.006-1.346 0-1 0-1S7.658 14 8.997 14c1.34 0 1.34-2-.006-2.006H6.996s-.003-.548-.003-1.083C9.555 10.446 11.5 8.2 11.5 5.5 11.5 2.462 9.038 0 6 0zM2.25 5.55C2.25 3.48 3.93 1.8 6 1.8c2.07 0 3.75 1.68 3.75 3.75C9.75 7.62 8.07 9.3 6 9.3c-2.07 0-3.75-1.68-3.75-3.75z" fill-rule="evenodd"></path></g></svg></div>
-  										<div class="ProfileHeader-iconWrapper" v-if="item.gender==0"><svg width="14" height="16" viewBox="0 0 14 14" class="Icon Icon--male" aria-hidden="true" style="height: 16px; width: 14px;"><title></title><g><path d="M3.025 10.64c-1.367-1.366-1.367-3.582 0-4.95 1.367-1.366 3.583-1.366 4.95 0 1.367 1.368 1.367 3.584 0 4.95-1.367 1.368-3.583 1.368-4.95 0zm10.122-9.368c-.002-.414-.34-.75-.753-.753L8.322 0c-.413-.002-.746.33-.744.744.002.413.338.75.75.752l2.128.313c-.95.953-1.832 1.828-1.832 1.828-2.14-1.482-5.104-1.27-7.013.64-2.147 2.147-2.147 5.63 0 7.777 2.15 2.148 5.63 2.148 7.78 0 1.908-1.91 2.12-4.873.636-7.016l1.842-1.82.303 2.116c.003.414.34.75.753.753.413.002.746-.332.744-.745l-.52-4.073z" fill-rule="evenodd"></path></g></svg></div>
-  									</div>
-  								</div>
-	  							<a v-if="item.badge.length>0" class="UserLink-badge" href="/question/48509984" target="_blank" data-tooltip="优秀回答者 · 已认证的个人"><svg viewBox="0 0 24 20" class="Icon Icon--badgeCG" width="18" height="16" aria-hidden="true" style="height: 16px; width: 18px;"><title>用户标识</title><g><g fill="none" fill-rule="evenodd"><path d="M4.64 11.39c1.068.895 1.808 2.733 1.66 4.113l.022-.196c-.147 1.384.856 2.4 2.24 2.278l-.198.016c1.387-.12 3.21.656 4.083 1.735l-.125-.154c.876 1.085 2.304 1.093 3.195.028l-.127.152c.895-1.068 2.733-1.808 4.113-1.66l-.198-.022c1.386.147 2.402-.856 2.28-2.238l.016.197c-.12-1.388.656-3.212 1.735-4.084l-.154.125c1.084-.876 1.093-2.304.028-3.195l.152.127c-1.068-.895-1.808-2.732-1.66-4.113l-.022.198c.147-1.386-.856-2.4-2.24-2.28l.198-.016c-1.387.122-3.21-.655-4.083-1.734l.125.153C14.802-.265 13.374-.274 12.483.79L12.61.64c-.895 1.068-2.733 1.808-4.113 1.662l.198.02c-1.386-.147-2.4.857-2.28 2.24L6.4 4.363c.12 1.387-.656 3.21-1.735 4.084l.154-.126c-1.084.878-1.093 2.304-.028 3.195l-.152-.127z" fill="#0F88EB"></path><path d="M.64 11.39c1.068.895 1.808 2.733 1.66 4.113l.022-.196c-.147 1.384.856 2.4 2.24 2.278l-.198.016c1.387-.12 3.21.656 4.083 1.735l-.125-.154c.876 1.085 2.304 1.093 3.195.028l-.127.152c.895-1.068 2.733-1.808 4.113-1.66l-.198-.022c1.386.147 2.402-.856 2.28-2.238l.016.197c-.12-1.388.656-3.212 1.735-4.084l-.154.125c1.084-.876 1.093-2.304.028-3.195l.152.127c-1.068-.895-1.808-2.732-1.66-4.113l-.022.198c.147-1.386-.856-2.4-2.24-2.28l.198-.016c-1.387.122-3.21-.655-4.083-1.734l.125.153C10.802-.265 9.374-.274 8.483.79L8.61.64c-.895 1.068-2.733 1.808-4.113 1.662l.198.02c-1.386-.147-2.4.857-2.28 2.24L2.4 4.363c.12 1.387-.656 3.21-1.735 4.084l.154-.126C-.265 9.2-.274 10.626.79 11.517L.64 11.39z" fill="#FFF"></path><path d="M14.946 9.082l-2.362 2.024.72 3.025c.13.535-.143.74-.616.45l-2.654-1.622L7.38 14.58c-.47.286-.747.09-.618-.45l.72-3.024-2.36-2.024c-.418-.357-.318-.68.235-.726l3.1-.248 1.195-2.872c.21-.507.55-.512.763 0l1.195 2.872 3.1.248c.547.044.657.365.236.726m4.263-.6l.15.128c-1.068-.895-1.808-2.732-1.66-4.113l-.022.197c.147-1.386-.856-2.4-2.24-2.278l.198-.018c-1.387.124-3.21-.653-4.083-1.732l.125.153C10.802-.265 9.374-.274 8.483.79L8.61.64C7.716 1.706 5.877 2.446 4.497 2.3l.198.02c-1.386-.147-2.4.857-2.28 2.24L2.4 4.363c.12 1.387-.656 3.21-1.735 4.084l.154-.126C-.265 9.2-.274 10.626.79 11.516L.64 11.39c1.068.894 1.808 2.733 1.66 4.112l.022-.196c-.147 1.385.856 2.4 2.24 2.28l-.198.015c1.387-.12 3.21.656 4.083 1.735l-.124-.154c.184.23.396.398.62.53.62.372 1.347.37 1.972 0 .215-.126.42-.286.602-.502l-.127.152c.895-1.068 2.733-1.808 4.113-1.66l-.198-.022c1.387.147 2.402-.856 2.28-2.238l.016.197c-.12-1.39.656-3.212 1.735-4.084l-.154.124c1.084-.876 1.093-2.303.03-3.194" fill="#FF9500"></path></g></g></svg></a>
-	  						</span>
+	  			<div class="PortraitItem">
+	  				<span class="UserLink PortraitItem-image UserItem-avatar">
+	  					<div class="Popover">
+	  						<div>
+	  						<a class="UserLink-link" target="_blank" v-bind:href="'https://www.zhihu.com/people/' + item.urlToken">
+	  							<img class="Avatar Avatar--large UserLink-avatar" v-bind:src="item.avatarUrl.replace('_is','_im')" v-bind:srcset="item.avatarUrl.replace('_is','_xl') + ' 2x'" v-bind:alt="item.name" style="width: 60px; height: 60px;">
+	  						</a>
+	  						</div>
 	  					</div>
-	  				</h2>
-	  				<div class="ContentItem-meta">
-	  					<div class="RichText" v-html="item.headline"></div>
-	  					<div v-for="badge in item.badge">{{badge.description}}</div>
-	  					<div v-if="item.isBindSina">
-	  						<span>
-	  							<a class="Button Button--plain" target="_blank" v-bind:href="item.sinaWeiboUrl" type="button">
-	  								<svg viewBox="0 0 22 18" class="Icon Icon--weibo" width="20" height="16" aria-hidden="true" style="fill: rgb(249, 110, 118); height: 16px; width: 20px;"><title></title><g>
-	  								<g fill-rule="evenodd">     
-	  								<path d="M14.518.06s-.87.644.03 1.71c0 0 6.287-1.19 5.69 6.33 0 0 1.05 1.13 1.674-.31 0 .002 1.44-8.584-7.394-7.73zM4.883 13.17s.038 2.584 3.326 2.584c3.657 0 3.683-2.98 3.683-2.98S12.1 9.67 8.687 9.61c-3.863-.07-3.804 3.56-3.804 3.56zM7.41 14.21c-.668 0-1.214-.447-1.214-.998 0-.55.543-.998 1.215-.998.67 0 1.213.447 1.213.998 0 .55-.54.998-1.212.998z"></path>     
-	  								<path d="M4.317 4.52C-2.603 10.353.873 14.85.873 14.85c.57 1.01 3.382 3.1 8.596 3.1 5.21 0 9.314-3.628 9.314-6.44 0-2.813-2.918-2.714-2.918-2.714 1.04-1.554.19-2.65.19-2.65-1.684-2.118-5.404-.16-5.407-.158.772-1.717.11-2.797.11-2.797C8.932.66 4.317 4.52 4.317 4.52zm10.448 7.79s-.467 4.16-6.447 4.16c-5.745 0-5.82-3.322-5.842-3.712 0 0-.073-4.423 6.58-4.654 5.94-.204 5.71 4.207 5.71 4.207zM18.65 7.045s1.018-4.37-3.864-3.818c0 0-.628.58.09 1.346 0 0 2.602-.58 2.397 2.598 0 0 .715.885 1.376-.125z"></path>   </g></g>
-	  								</svg>
-	  							</a> {{item.sinaWeiboName}}
-	  						</span>
-	  					</div>
+	  				</span>
+	  				<div class="ContentItem PortraitItem-content">
+	  					<h2 class="ContentItem-title">
+	  						<div class="UserItem-title">
+	  							<span class="UserLink UserItem-name">
+	  								<div class="Popover">
+	  									<div>
+	  										<a class="UserLink-link" target="_blank" v-bind:href="'https://www.zhihu.com/people/' + item.urlToken">{{item.name}}</a>
+	  										<div class="ProfileHeader-iconWrapper" v-if="item.gender==1"><svg width="14" height="16" viewBox="0 0 12 16" class="Icon Icon--female" aria-hidden="true" style="height: 16px; width: 14px;"><title></title><g><path d="M6 0C2.962 0 .5 2.462.5 5.5c0 2.69 1.932 4.93 4.485 5.407-.003.702.01 1.087.01 1.087H3C1.667 12 1.667 14 3 14s1.996-.006 1.996-.006v1c0 1.346 2.004 1.346 1.998 0-.006-1.346 0-1 0-1S7.658 14 8.997 14c1.34 0 1.34-2-.006-2.006H6.996s-.003-.548-.003-1.083C9.555 10.446 11.5 8.2 11.5 5.5 11.5 2.462 9.038 0 6 0zM2.25 5.55C2.25 3.48 3.93 1.8 6 1.8c2.07 0 3.75 1.68 3.75 3.75C9.75 7.62 8.07 9.3 6 9.3c-2.07 0-3.75-1.68-3.75-3.75z" fill-rule="evenodd"></path></g></svg></div>
+	  										<div class="ProfileHeader-iconWrapper" v-if="item.gender==0"><svg width="14" height="16" viewBox="0 0 14 14" class="Icon Icon--male" aria-hidden="true" style="height: 16px; width: 14px;"><title></title><g><path d="M3.025 10.64c-1.367-1.366-1.367-3.582 0-4.95 1.367-1.366 3.583-1.366 4.95 0 1.367 1.368 1.367 3.584 0 4.95-1.367 1.368-3.583 1.368-4.95 0zm10.122-9.368c-.002-.414-.34-.75-.753-.753L8.322 0c-.413-.002-.746.33-.744.744.002.413.338.75.75.752l2.128.313c-.95.953-1.832 1.828-1.832 1.828-2.14-1.482-5.104-1.27-7.013.64-2.147 2.147-2.147 5.63 0 7.777 2.15 2.148 5.63 2.148 7.78 0 1.908-1.91 2.12-4.873.636-7.016l1.842-1.82.303 2.116c.003.414.34.75.753.753.413.002.746-.332.744-.745l-.52-4.073z" fill-rule="evenodd"></path></g></svg></div>
+	  									</div>
+	  								</div>
+		  							<a v-if="item.badge.length>0" class="UserLink-badge" href="/question/48509984" target="_blank" data-tooltip="优秀回答者 · 已认证的个人"><svg viewBox="0 0 24 20" class="Icon Icon--badgeCG" width="18" height="16" aria-hidden="true" style="height: 16px; width: 18px;"><title>用户标识</title><g><g fill="none" fill-rule="evenodd"><path d="M4.64 11.39c1.068.895 1.808 2.733 1.66 4.113l.022-.196c-.147 1.384.856 2.4 2.24 2.278l-.198.016c1.387-.12 3.21.656 4.083 1.735l-.125-.154c.876 1.085 2.304 1.093 3.195.028l-.127.152c.895-1.068 2.733-1.808 4.113-1.66l-.198-.022c1.386.147 2.402-.856 2.28-2.238l.016.197c-.12-1.388.656-3.212 1.735-4.084l-.154.125c1.084-.876 1.093-2.304.028-3.195l.152.127c-1.068-.895-1.808-2.732-1.66-4.113l-.022.198c.147-1.386-.856-2.4-2.24-2.28l.198-.016c-1.387.122-3.21-.655-4.083-1.734l.125.153C14.802-.265 13.374-.274 12.483.79L12.61.64c-.895 1.068-2.733 1.808-4.113 1.662l.198.02c-1.386-.147-2.4.857-2.28 2.24L6.4 4.363c.12 1.387-.656 3.21-1.735 4.084l.154-.126c-1.084.878-1.093 2.304-.028 3.195l-.152-.127z" fill="#0F88EB"></path><path d="M.64 11.39c1.068.895 1.808 2.733 1.66 4.113l.022-.196c-.147 1.384.856 2.4 2.24 2.278l-.198.016c1.387-.12 3.21.656 4.083 1.735l-.125-.154c.876 1.085 2.304 1.093 3.195.028l-.127.152c.895-1.068 2.733-1.808 4.113-1.66l-.198-.022c1.386.147 2.402-.856 2.28-2.238l.016.197c-.12-1.388.656-3.212 1.735-4.084l-.154.125c1.084-.876 1.093-2.304.028-3.195l.152.127c-1.068-.895-1.808-2.732-1.66-4.113l-.022.198c.147-1.386-.856-2.4-2.24-2.28l.198-.016c-1.387.122-3.21-.655-4.083-1.734l.125.153C10.802-.265 9.374-.274 8.483.79L8.61.64c-.895 1.068-2.733 1.808-4.113 1.662l.198.02c-1.386-.147-2.4.857-2.28 2.24L2.4 4.363c.12 1.387-.656 3.21-1.735 4.084l.154-.126C-.265 9.2-.274 10.626.79 11.517L.64 11.39z" fill="#FFF"></path><path d="M14.946 9.082l-2.362 2.024.72 3.025c.13.535-.143.74-.616.45l-2.654-1.622L7.38 14.58c-.47.286-.747.09-.618-.45l.72-3.024-2.36-2.024c-.418-.357-.318-.68.235-.726l3.1-.248 1.195-2.872c.21-.507.55-.512.763 0l1.195 2.872 3.1.248c.547.044.657.365.236.726m4.263-.6l.15.128c-1.068-.895-1.808-2.732-1.66-4.113l-.022.197c.147-1.386-.856-2.4-2.24-2.278l.198-.018c-1.387.124-3.21-.653-4.083-1.732l.125.153C10.802-.265 9.374-.274 8.483.79L8.61.64C7.716 1.706 5.877 2.446 4.497 2.3l.198.02c-1.386-.147-2.4.857-2.28 2.24L2.4 4.363c.12 1.387-.656 3.21-1.735 4.084l.154-.126C-.265 9.2-.274 10.626.79 11.516L.64 11.39c1.068.894 1.808 2.733 1.66 4.112l.022-.196c-.147 1.385.856 2.4 2.24 2.28l-.198.015c1.387-.12 3.21.656 4.083 1.735l-.124-.154c.184.23.396.398.62.53.62.372 1.347.37 1.972 0 .215-.126.42-.286.602-.502l-.127.152c.895-1.068 2.733-1.808 4.113-1.66l-.198-.022c1.387.147 2.402-.856 2.28-2.238l.016.197c-.12-1.39.656-3.212 1.735-4.084l-.154.124c1.084-.876 1.093-2.303.03-3.194" fill="#FF9500"></path></g></g></svg></a>
+		  						</span>
+		  					</div>
+		  				</h2>
+		  				<div class="ContentItem-meta">
+		  					<div class="RichText" v-html="item.headline"></div>
+		  					<div v-for="badge in item.badge">{{badge.description}}</div>
+		  					<div v-if="item.isBindSina">
+		  						<span>
+		  							<a class="Button Button--plain" target="_blank" v-bind:href="item.sinaWeiboUrl" type="button">
+		  								<svg viewBox="0 0 22 18" class="Icon Icon--weibo" width="20" height="16" aria-hidden="true" style="fill: rgb(249, 110, 118); height: 16px; width: 20px;"><title></title><g>
+		  								<g fill-rule="evenodd">     
+		  								<path d="M14.518.06s-.87.644.03 1.71c0 0 6.287-1.19 5.69 6.33 0 0 1.05 1.13 1.674-.31 0 .002 1.44-8.584-7.394-7.73zM4.883 13.17s.038 2.584 3.326 2.584c3.657 0 3.683-2.98 3.683-2.98S12.1 9.67 8.687 9.61c-3.863-.07-3.804 3.56-3.804 3.56zM7.41 14.21c-.668 0-1.214-.447-1.214-.998 0-.55.543-.998 1.215-.998.67 0 1.213.447 1.213.998 0 .55-.54.998-1.212.998z"></path>     
+		  								<path d="M4.317 4.52C-2.603 10.353.873 14.85.873 14.85c.57 1.01 3.382 3.1 8.596 3.1 5.21 0 9.314-3.628 9.314-6.44 0-2.813-2.918-2.714-2.918-2.714 1.04-1.554.19-2.65.19-2.65-1.684-2.118-5.404-.16-5.407-.158.772-1.717.11-2.797.11-2.797C8.932.66 4.317 4.52 4.317 4.52zm10.448 7.79s-.467 4.16-6.447 4.16c-5.745 0-5.82-3.322-5.842-3.712 0 0-.073-4.423 6.58-4.654 5.94-.204 5.71 4.207 5.71 4.207zM18.65 7.045s1.018-4.37-3.864-3.818c0 0-.628.58.09 1.346 0 0 2.602-.58 2.397 2.598 0 0 .715.885 1.376-.125z"></path>   </g></g>
+		  								</svg>
+		  							</a> {{item.sinaWeiboName}}
+		  						</span>
+		  					</div>
+		  				</div>
+		  				<div class="ContentItem-status">
+		  					<span class="ContentItem-statusItem"> 关注者 {{item.followerCount}} 人</span>
+		  					<span class="ContentItem-statusItem"> 获得赞同 {{item.voteupCount}} 次</span>
+		  					<span class="ContentItem-statusItem"> 获得感谢 {{item.thankedCount}} 次</span>
+		  					<span class="ContentItem-statusItem"> 获得收藏 {{item.favoritedCount}} 次</span>
+		  					<span class="ContentItem-statusItem"> 文章 {{item.articlesCount}} </span>
+		  					<span class="ContentItem-statusItem"> 提问 {{item.questionCount}} </span>
+		  					<span class="ContentItem-statusItem"> 回答 {{item.answerCount}} </span>
+		  					<span v-if="item.markedAnswersCount>0" class="ContentItem-statusItem">其中被 {{item.markedAnswersText}} 收录 {{item.markedAnswersCount}}</span>
+		  				</div>
 	  				</div>
-	  				<div class="ContentItem-status">
-	  					<span class="ContentItem-statusItem"> 关注者 {{item.followerCount}} 人</span>
-	  					<span class="ContentItem-statusItem"> 获得赞同 {{item.voteupCount}} 次</span>
-	  					<span class="ContentItem-statusItem"> 获得感谢 {{item.thankedCount}} 次</span>
-	  					<span class="ContentItem-statusItem"> 获得收藏 {{item.favoritedCount}} 次</span>
-	  					<span class="ContentItem-statusItem"> 文章 {{item.articlesCount}} </span>
-	  					<span class="ContentItem-statusItem"> 提问 {{item.questionCount}} </span>
-	  					<span class="ContentItem-statusItem"> 回答 {{item.answerCount}} </span>
-	  					<span v-if="item.markedAnswersCount>0" class="ContentItem-statusItem">其中被 {{item.markedAnswersText}} 收录 {{item.markedAnswersCount}}</span>
-	  				</div>
-  				</div>
-  			</div>
+	  			</div>
 			</div>
-			<div class="Pagination" id="main-pager">
-				<ul class="pagination">
-				    <li v-if="hasPrev"><a v-bind:rel="prev" href="javascript:">«</a></li>
-				    <li v-if="hasPrev"><a v-bind:rel="prev" href="javascript:">{{prev}}</a></li>
-				    <li class="active"><a v-bind:rel="current" href="javascript:">{{current}}</a></li>
-				    <li v-if="hasNext"><a v-bind:rel="next" href="javascript:">{{next}}</a></li>
-				    <li v-if="hasNext"><a v-bind:rel="next" href="javascript:">»</a></li>
-			  	</ul>
-			</div>
+		</div>
+		<div class="Pagination" id="main-pager">
+			<ul class="pagination">
+			    <li v-if="hasPrev"><a v-bind:href="'javascript:_changePage('+ prev +')'">«</a></li>
+			    <li v-if="hasPrev"><a v-bind:href="'javascript:_changePage('+ prev +')'">{{prev}}</a></li>
+			    <li class="active"><a v-bind:href="'javascript:_changePage('+ current +')'">{{current}}</a></li>
+			    <li v-if="hasNext"><a v-bind:href="'javascript:_changePage('+ next +')'">{{next}}</a></li>
+			    <li v-if="hasNext"><a v-bind:href="'javascript:_changePage('+ next +')'">»</a></li>
+		  	</ul>
 		</div>
 </div>
 
 <%- include('layouts/footer') %>
 <script type="text/javascript" src="/javascripts/<%= name %>.js"></script>
 <script type="text/javascript">
-	function _changePage(index){
-		if(index>26)
-			index=1;
-		var offset = (index-1)*10;
-		var _data = offset+10>____data_.length? ____data_.slice(offset,____data_.length) : ____data_.slice(offset,offset+10);
+	var vcontext;
+	var vpager;
+	var _data;
+	var page_data;
 
-		var vcontext = new Vue({
+	function _initPage(){
+		_data = ____data_.slice(0,10);
+		page_data = {
+			current: 1,
+			hasPrev: false,
+			hasNext: true,
+			prev: 0,
+			next: 2
+		};
+		vcontext = new Vue({
 			el:'#main-context',
 			data: {
 				items: _data
 			}
 		});
-		var x = {
-				current: index,
-				hasPrev: index==1,
-				hasNext: index==26,
-				prev: index-1,
-				next: index+1
-			};
-		var vpager = new Vue({
+		vpager = new Vue({
 			el: '#main-pager',
-			data: x
+			data: page_data
 		});
 	}
-	$(function(){
-		$("#main-pager li a").click(function(){
-			_changePage(parseInt($(this).attr('rel')));
 
-		});
-		_changePage(1);
+	function _changePage(index){
+		if(index>26)
+			index=1;
+		offset = (index-1)*10;
+		_data = offset+10>____data_.length ? ____data_.slice(offset,____data_.length) : ____data_.slice(offset,offset+10);
+		vcontext.items= _data;
+		vpager.current = index;
+		vpager.hasPrev = index!=1;
+		vpager.hasNext = index!=26;
+		vpager.prev = index-1;
+		vpager.next = index+1;
+	}
+
+	$(function(){
+		_initPage();
 	});
 </script>
 <%- include('layouts/end') %>
