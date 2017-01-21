@@ -1,3 +1,11 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<%- include('layouts/header') %>
+
+<div class="alert alert-dismissible alert-danger">
+	<strong><%= error.status %></strong> <%= message %> .
+</div>
+
+
+<%- include('layouts/footer') %>
+<script type="text/javascript" src="/javascripts/zhihu/users/<%= name %>.js"></script>
+<script type="text/javascript" src="/javascripts/zhihu.js"></script>
+<%- include('layouts/end') %>

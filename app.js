@@ -12,7 +12,6 @@ var winston = require('winston');
 var expressWinston = require('express-winston');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var zhihu = require('./routes/zhihu');
 
 var app = express();
@@ -49,12 +48,11 @@ app.use(require('express-formidable')({
 }));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/zhihu', zhihu);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Page Not Found');
   err.status = 404;
   next(err);
 });

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('zhihu', { title: '知乎榜' });
+  res.render('zhihu', { title: '知乎排行榜' });
 });
 
 router.get('/users/:name',function(req,res,next){
@@ -35,10 +35,10 @@ router.get('/users/:name',function(req,res,next){
 			subtitle='按被收录答案数';
 		break;
 		default:
-			throw new Error('404');
+			throw new Error('Page Not Found');
 		break;
 	}
-	res.render('zhihu_users',{title:'知乎用户榜',subtitle: subtitle,name: name});
+	res.render('zhihu_users',{title:'知乎用户排行榜',subtitle: subtitle,name: name});
 });
 
 router.get('/answers/:name',function(req,res,next){
@@ -46,16 +46,16 @@ router.get('/answers/:name',function(req,res,next){
 	var subtitle = '';
 	switch(name){
 		case 'top_comment_count':
-			subtitle='按关注者人数';
+			subtitle='按评论数';
 		break;
 		case 'top_voteup_count':
-			subtitle='按获得赞同数';
+			subtitle='按赞同数';
 		break;
 		default:
-			throw new Error('404');
+			throw new Error('Page Not Found');
 		break;
 	}
-	res.render('zhihu_answers',{title:'知乎用户榜',subtitle: subtitle,name: name});
+	res.render('zhihu_answers',{title:'知乎答案排行榜',subtitle: subtitle,name: name});
 });
 
 router.get('/articles/:name',function(req,res,next){
@@ -63,16 +63,16 @@ router.get('/articles/:name',function(req,res,next){
 	var subtitle = '';
 	switch(name){
 		case 'top_comment_count':
-			subtitle='按关注者人数';
+			subtitle='按评论数';
 		break;
 		case 'top_voteup_count':
-			subtitle='按获得赞同数';
+			subtitle='按赞同数';
 		break;
 		default:
-			throw new Error('404');
+			throw new Error('Page Not Found');
 		break;
 	}
-	res.render('zhihu_articles',{title:'知乎用户榜',subtitle: subtitle,name: name});
+	res.render('zhihu_articles',{title:'知乎文章排行榜',subtitle: subtitle,name: name});
 });
 
 router.get('/favlists/:name',function(req,res,next){
@@ -83,10 +83,10 @@ router.get('/favlists/:name',function(req,res,next){
 			subtitle='按关注者人数';
 		break;
 		default:
-			throw new Error('404');
+			throw new Error('Page Not Found');
 		break;
 	}
-	res.render('zhihu_favlists',{title:'知乎用户榜',subtitle: subtitle,name: name});
+	res.render('zhihu_favlists',{title:'知乎收藏排行榜',subtitle: subtitle,name: name});
 });
 
 router.get('/questions/:name',function(req,res,next){
@@ -100,10 +100,10 @@ router.get('/questions/:name',function(req,res,next){
 			subtitle='按获得赞同数';
 		break;
 		default:
-			throw new Error('404');
+			throw new Error('Page Not Found');
 		break;
 	}
-	res.render('zhihu_questions',{title:'知乎用户榜',subtitle: subtitle,name: name});
+	res.render('zhihu_questions',{title:'知乎问题排行榜',subtitle: subtitle,name: name});
 });
 
 router.get('/zhuanlans/:name',function(req,res,next){
@@ -111,13 +111,13 @@ router.get('/zhuanlans/:name',function(req,res,next){
 	var subtitle = '';
 	switch(name){
 		case 'top_followers_count':
-			subtitle='按获得赞同数';
+			subtitle='按关注者人数';
 		break;
 		default:
-			throw new Error('404');
+			throw new Error('Page Not Found');
 		break;
 	}
-	res.render('zhihu_zhuanlans',{title:'知乎用户榜',subtitle: subtitle,name: name});
+	res.render('zhihu_zhuanlans',{title:'知乎专栏排行榜',subtitle: subtitle,name: name});
 });
 
 module.exports = router;
