@@ -1,0 +1,58 @@
+
+<%- include('layouts/header') %>
+
+<div class="Card ProfileMain">
+	<div class="ProfileMain-header">
+		<ul role="tablist" class="Tabs ProfileMain-tabs">
+			<li role="tab" class="Tabs-item Tabs-item--noMeta" aria-controls="Profile-following">
+				<a class="Tabs-link is-active" href="#">知乎用户榜</a>
+			</li>
+			<li style="float: right; padding-top: 10px;">
+				<div class="btn-group">
+                  <a href="#" class="btn btn-primary"><%= subtitle %></a>
+                  <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="/zhihu/zhuanlans/top_followers_count">按关注者人数</a></li>
+                  </ul>
+                </div>
+			</li>
+		</ul>
+	</div>
+		<div class="List" id="main-context">
+			<div class="List-item" v-for="item in items">
+				<div class="PortraitItem">
+					<a class="ColumnLink PortraitItem-image"  v-bind:href="'https://zhuanlan.zhihu.com/'+item.id" target="_blank">
+						<div class="Popover">
+							<div>
+								<img class="Avatar Avatar--large" v-bind:src="item.image_url.replace('_l','_im')" v-bind:srcset="item.image_url.replace('_l','_xl') + ' 2x'" v-bind:alt="item.title" style="width: 60px; height: 60px;">
+							</div>
+						</div>
+					</a>
+					<div class="ContentItem PortraitItem-content">
+						<h2 class="ContentItem-title">
+							<a class="ColumnLink"  v-bind:href="'https://zhuanlan.zhihu.com/'+item.id" target="_blank">
+								<div class="Popover">
+									<div>{{item.title}}</div>
+								</div>
+							</a>
+						</h2>
+						<div class="ContentItem-meta">
+							<div class="ColumnItem-meta">{{item.intro}}</div>
+						</div>
+						<div class="ContentItem-status">
+							<span class="ContentItem-statusItem"> 关注者 {{item.followers}} 人</span>
+		  					<span class="ContentItem-statusItem"> 回答 {{item.articles_count}} </span>
+		  					<span class="ContentItem-statusItem">其中被 {{new Date(item.updated).toLocaleString()}}</span>
+		  					<span class="ContentItem-statusItem">其中被 {{new Date(item.lastUpdateTime).toLocaleString()}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%- include('components/pager') %>
+</div>
+
+<%- include('layouts/footer') %>
+<script type="text/javascript" src="/javascripts/zhihu/zhuanlans/<%= name %>.js"></script>
+<script type="text/javascript" src="/javascripts/zhihu.js"></script>
+<%- include('layouts/end') %>

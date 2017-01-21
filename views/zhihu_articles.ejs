@@ -1,0 +1,79 @@
+
+<%- include('layouts/header') %>
+
+<div class="Card ProfileMain">
+	<div class="ProfileMain-header">
+		<ul role="tablist" class="Tabs ProfileMain-tabs">
+			<li role="tab" class="Tabs-item Tabs-item--noMeta" aria-controls="Profile-following">
+				<a class="Tabs-link is-active" href="#">知乎用户榜</a>
+			</li>
+			<li style="float: right; padding-top: 10px;">
+				<div class="btn-group">
+                  <a href="#" class="btn btn-primary"><%= subtitle %></a>
+                  <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="/zhihu/articles/top_comment_count">按关注者人数</a></li>
+                    <li><a href="/zhihu/articles/top_voteup_count">按获得赞同数</a></li>
+                  </ul>
+                </div>
+			</li>
+		</ul>
+	</div>
+		<div class="List" id="main-context">
+			<div class="List-item" v-for="item in items">
+				<div data-za-module="AnswerItem">
+					<div class="ContentItem">
+						<h2 class="ContentItem-title">
+							<a target="_blank" v-bind:href="'https://zhuanlan.zhihu.com/p/'+item.id">{{item.title}}</a>
+						</h2>
+						<div class="ContentItem-meta">
+							<div class="AnswerItem-meta">
+								<div class="AuthorInfo">
+									<span class="UserLink AuthorInfo-avatarWrapper">
+										<div class="Popover">
+											<div>
+												<a class="UserLink-link" target="_blank" v-bind:href="'https://www.zhihu.com/people/' + item.author.url_token">
+													<img class="Avatar AuthorInfo-avatar" v-bind:src="item.author.avatar_url.replace('_is','_xs')" v-bind:srcset="item.author.avatar_url.replace('_is','_l') + ' 2x'" v-bind:alt="item.author.name" style="width: 38px; height: 38px;">
+												</a>
+											</div>
+										</div>
+									</span>
+									<div class="AuthorInfo-content">
+										<div class="AuthorInfo-name">
+											<span class="UserLink">
+												<div class="Popover">
+													<div>
+														<a class="UserLink-link" target="_blank" v-bind:href="'https://www.zhihu.com/people/' + item.author.url_token">{{item.author.name}}</a>
+													</div>
+												</div>
+											</span>
+										</div>
+										<div class="RichText AuthorInfo-badge" v-html="item.author.headline"></div>
+									</div>
+								</div>
+								<div class="AnswerItem-extraInfo">
+									<span>voteup {{item.voteup_count}}</span>
+									<span>comment {{item.comment_count}}</span>
+									<span>create {{new Date(item.created_time).toLocaleString()}}</span>
+									<span>last_update {{new Date(item.updated_time).toLocaleString()}}</span>
+								</div>
+							</div>
+						</div>
+						<div class="ContentItem-content">
+							<div>
+								<div>
+									<span class="RichText CopyrightRichText-richText" v-html="item.excerpt"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%- include('components/pager') %>
+</div>
+
+<%- include('layouts/footer') %>
+<script type="text/javascript" src="/javascripts/zhihu/articles/<%= name %>.js"></script>
+<script type="text/javascript" src="/javascripts/zhihu.js"></script>
+<%- include('layouts/end') %>
