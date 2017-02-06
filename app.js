@@ -13,6 +13,7 @@ var expressWinston = require('express-winston');
 
 var index = require('./routes/index');
 var zhihu = require('./routes/zhihu');
+var grocerystore = require('./routes/grocerystore');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use(require('express-formidable')({
 
 app.use('/', index);
 app.use('/zhihu', zhihu);
+app.use('/grocerystore', grocerystore);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
